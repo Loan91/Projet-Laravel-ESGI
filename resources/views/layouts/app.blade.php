@@ -38,6 +38,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @if(Gate::allows('admin'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin_users') }}">Gestion utilisateurs</a>
+                        </li>
+                        @endif
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
