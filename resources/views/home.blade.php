@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                        <a href="{{ route('film') }}">Ajouter un film</a>
                 </div>
             </div>
         </div>
