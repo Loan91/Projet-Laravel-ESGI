@@ -19,7 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')
+    ->name('home');
+
+Route::get('/admin/users', 'AdminController@index')
+    ->middleware('auth')
+    ->middleware('can:admin_users')
+    ->name('admin_users');
 
 Route::get('/films', 'FilmController@index')->name('film');
 
