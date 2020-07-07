@@ -49,7 +49,7 @@ Route::get('/films/edit/{id}', 'FilmController@edit')
     ->middleware('can:admin_films')
     ->name('edit_film');
 
-Route::put('/films/update', 'FilmController@update')
+Route::post('/films/update/{id}', 'FilmController@update')
     ->middleware('auth')
     ->middleware('can:admin_films')
     ->name('update_film');

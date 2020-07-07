@@ -16,7 +16,7 @@ class FilmController extends Controller
     public function index()
     {
         $films = Film::paginate(5);
-         return view('/film/film', ['films' => $films]);
+         return view('admin/film/film', ['films' => $films]);
     }
 
     /**
@@ -26,7 +26,7 @@ class FilmController extends Controller
      */
     public function create(Request $request)
     {
-        return view('film/new');
+        return view('admin/film/new');
     }
 
     /**
@@ -62,7 +62,7 @@ class FilmController extends Controller
     public function show($id)
     {
         $film = Film::find($id);
-        return view('film/show', ['film' => $film ]);
+        return view('admin/film/show', ['film' => $film ]);
     }
 
     /**
@@ -73,7 +73,8 @@ class FilmController extends Controller
      */
     public function edit($id)
     {
-        return view('film/edit');
+        $film = Film::findOrFail($id);
+        return view('admin/film/edit', ['film' => $film]);
     }
 
     /**
@@ -83,11 +84,27 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Film $film)
+    public function update($id, Request $request)
     {
-        $film->update($request->all());
 
-        return view('film/edit')->withTask($film)->with('info', 'Le film a bien été modifié');;
+        $request->validate([
+            'titre'=>['required', 'min:5', 'max:50'],
+            'genre' => ['required', 'min:5', 'max:50'],
+            'date_sortie' => ['required', 'date'],
+            'description' => ['required'],
+        ]);
+
+        $film = Film::findorfail($id);
+        $film->titre = $request->titre;
+        $film->genre = $request->genre;
+        $film->date_sortie = Carbon::create($request->date_sortie);
+        $film->description = $request->description;
+
+        $film->save();
+
+
+
+        return redirect('films')->with('info', 'Le film a bien été modifié avec succès.');
 
 
     }
