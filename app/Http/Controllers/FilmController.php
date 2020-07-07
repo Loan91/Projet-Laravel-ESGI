@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FilmController extends Controller
@@ -14,7 +15,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::all();
+        $films = Film::paginate(5);
          return view('/film/film', ['films' => $films]);
     }
 
@@ -45,6 +46,7 @@ class FilmController extends Controller
         $film->titre = $request->titre;
         $film->genre = $request->genre;
         $film->date_sortie = Carbon::create($request->date_sortie);
+        $film->description = $request->description;
 
         $film->save();
 
@@ -59,7 +61,8 @@ class FilmController extends Controller
      */
     public function show($id)
     {
-        //
+        $film = Film::find($id);
+        return view('film/show', ['film' => $film ]);
     }
 
     /**
@@ -70,7 +73,7 @@ class FilmController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('film/edit');
     }
 
     /**
@@ -80,19 +83,30 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Film $film)
     {
-        //
+        $film->update($request->all());
+
+        return view('film/edit')->withTask($film)->with('info', 'Le film a bien été modifié');;
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Film $film
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        //
+        $film = Film::findorfail($id);
+
+        $film->delete();
+        return back()->with('info', 'Le film a bien été supprimé dans la base de données.');
+
+
+
     }
 }

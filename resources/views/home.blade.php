@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                        <a href="{{ route('film') }}">Ajouter un film</a>
+
                 </div>
             </div>
         </div>

@@ -24,15 +24,16 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('add_film') }}" method="post">
+                        <form action="{{ route('update_film', $film->id) }}" method="post">
 
                             @csrf
+
                             <div class="mt-4">
                                 <div class="form-group">
 
                                     <div class="col-sm-10">
 
-                                        Titre du film : <input type="text" name="titre" id="titre" placeholder="Star wars" class="form-control" required>
+                                        Titre du film : <input type="text" name="titre" id="titre" value="{{old('titre', $film->titre)}}" placeholder="Star wars" class="form-control" required>
                                     </div>
 
                                     <div class="form-group">
@@ -56,13 +57,13 @@
 
                                         </div>
                                         <br><div class="row">
-                                                <div class="col text-center">
-                                                    <input type="submit" value="Enregistrer le film !" class="btn btn-success mx-auto center-block">
-                                                </div>
+                                            <div class="col text-center">
+                                                <input type="submit" value="Enregistrer le film !" class="btn btn-success mx-auto center-block">
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                 </div>

@@ -42,6 +42,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin_users') }}">Gestion utilisateurs</a>
                         </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('film') }}">Gestion des films</a>
+                            </li>
                         @endif
                         <!-- Authentication Links -->
                         @guest

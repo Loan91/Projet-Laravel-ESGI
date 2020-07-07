@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
 
@@ -14,6 +14,12 @@
                             </div>
                         </div>
                     </div>
+
+                        @if(session()->has('info'))
+                            <div class="alert alert-success">
+                                {{ session('info') }}
+                            </div>
+                        @endif
 
                     <div class="card-body">
                         @if (session('status'))
@@ -37,6 +43,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Titre du film</th>
                                     <th>Genre du film</th>
                                     <th>Date de sortie</th>
@@ -46,14 +53,27 @@
                                 <tbody>
                                 @foreach($films as $film)
                                     <tr>
+                                        <td>{{$film->id}}</td>
                                         <td>{{$film->titre}}</td>
                                         <td>{{$film->genre}}</td>
                                         <td>{{date('d/m/Y', strtotime($film->date_sortie))}}</td>
-                                        <td></td>
+                                        <td><a class="btn btn-primary" href="{{ route('show_film', $film->id) }}">Voir</a></td>
+                                        <td><a class="btn btn-warning" href="{{ route('edit_film', $film->id) }}">Modifier</a></td>
+                                        <td> <form action="{{ route('delete_film', $film->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-lg" type="submit">Supprimer</button>
+                                            </form></td>
                                     </tr>
+
                                 @endforeach
                                 </tbody>
                             </table>
+
+                            <footer class="card-footer">
+                                {{ $films->links() }}
+                            </footer>
+
 
                     </div>
                 </div>

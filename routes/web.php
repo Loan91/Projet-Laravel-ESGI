@@ -27,8 +27,30 @@ Route::get('/admin/users', 'AdminController@index')
     ->middleware('can:admin_users')
     ->name('admin_users');
 
-Route::get('/films', 'FilmController@index')->name('film');
+Route::get('/films', 'FilmController@index')
+    ->middleware('auth')
+    ->name('film');
 
-Route::get('/films/new', 'FilmController@create')->name('new_film');
+Route::get('/films/new', 'FilmController@create')
+    ->middleware('auth')
+    ->name('new_film');
 
-Route::post('/films/add', 'FilmController@store')->name('add_film');
+Route::post('/films/add', 'FilmController@store')
+    ->middleware('auth')
+    ->name('add_film');
+
+Route::get('/films/show/{id}', 'FilmController@show')
+    ->middleware('auth')
+    ->name('show_film');
+
+Route::get('/films/edit/{id}', 'FilmController@edit')
+    ->middleware('auth')
+    ->name('edit_film');
+
+Route::put('/films/update', 'FilmController@update')
+    ->middleware('auth')
+    ->name('update_film');
+
+Route::delete('/films/delete/{id}', 'FilmController@destroy')
+    ->middleware('auth')
+    ->name('delete_film');
