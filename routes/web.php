@@ -72,6 +72,9 @@ Route::get('/films/restore/{id}', 'FilmController@restore')
     ->name('restore_film');
 
 
+Route::get('/locations', 'LocationController@index')
+    ->name('locations');
+
 
 
 
