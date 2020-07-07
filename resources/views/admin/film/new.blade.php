@@ -39,7 +39,7 @@
 
                                         <div class="col-sm-10">
 
-                                            Genre du film : <input type="text" name="genre" id="genre" placeholder="action" class="form-control" required>
+                                            Genre du film : <input type="text" name="genre" id="genre" placeholder="Action" class="form-control" required>
                                         </div>
 
                                         <div class="form-group">
@@ -51,7 +51,7 @@
 
                                             <div class="col-sm-10">
 
-                                                Description du film : <textarea name="description" id="description" placeholder="resumé du film..." rows="5" cols="33" class="form-control"></textarea>
+                                                Description du film : <textarea name="description" id="description" placeholder="Resumé du film..." rows="5" cols="33" class="form-control"></textarea>
                                             </div>
 
                                         </div>

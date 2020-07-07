@@ -40,7 +40,7 @@
                             @endif
 
                             @if(count($films)== 0)
-                                Aucun film n'est enregistrer
+                                Aucun film n'est enregistré.
                             @else
                             <table class="table table-bordered">
                                 <thead>

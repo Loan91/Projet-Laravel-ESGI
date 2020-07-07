@@ -58,7 +58,7 @@
                                     </tbody>
                                 </table>
                             @else
-                                Aucun film posséder par un utilisateur.
+                                Aucun film possédé par un utilisateur.
                             @endif
                 </div>
             </div>
