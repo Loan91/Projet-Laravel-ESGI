@@ -22,38 +22,49 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
-Route::get('/admin/users', 'AdminController@index')
-    ->middleware('auth')
-    ->middleware('can:admin_users')
-    ->name('admin_users');
+
 
 Route::get('/films', 'FilmController@index')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('film');
 
 Route::get('/films/new', 'FilmController@create')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('new_film');
 
 Route::post('/films/add', 'FilmController@store')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('add_film');
 
 Route::get('/films/show/{id}', 'FilmController@show')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('show_film');
 
 Route::get('/films/edit/{id}', 'FilmController@edit')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('edit_film');
 
 Route::put('/films/update', 'FilmController@update')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('update_film');
 
 Route::delete('/films/delete/{id}', 'FilmController@destroy')
     ->middleware('auth')
+    ->middleware('can:admin_films')
     ->name('delete_film');
+
+
+
+Route::get('/admin/users', 'AdminController@index')
+    ->middleware('auth')
+    ->middleware('can:admin_users')
+    ->name('admin_users');
 
 Route::get('/admin/users/edit/{id}', 'AdminController@edit')
     ->middleware('auth')
