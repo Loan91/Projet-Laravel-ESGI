@@ -39,11 +39,12 @@
                                 </div>
                             @endif
 
-
+                            @if(count($films)== 0)
+                                Aucun film n'est enregistrer
+                            @else
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Titre du film</th>
                                     <th>Genre du film</th>
                                     <th>Date de sortie</th>
@@ -52,28 +53,41 @@
                                 </thead>
                                 <tbody>
                                 @foreach($films as $film)
-                                    <tr>
-                                        <td>{{$film->id}}</td>
+                                    <tr @if($film->deleted_at) class="bg-secondary" @endif>
                                         <td>{{$film->titre}}</td>
                                         <td>{{$film->genre}}</td>
                                         <td>{{date('d/m/Y', strtotime($film->date_sortie))}}</td>
-                                        <td><a class="btn btn-primary" href="{{ route('show_film', $film->id) }}">Voir</a></td>
-                                        <td><a class="btn btn-warning" href="{{ route('edit_film', $film->id) }}">Modifier</a></td>
-                                        <td> <form action="{{ route('delete_film', $film->id) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-lg" type="submit">Supprimer</button>
-                                            </form></td>
+                                        <td @if($film->deleted_at)>
+
+
+                                            <a class="btn btn-primary btn-sm" href="{{ route('restore_film', $film->id) }}">Restaurer</a>
+
+                                        @else
+                                            <td><a class="btn btn-primary btn-sm" href="{{ route('show_film', $film->id) }}">Voir</a></td>
+                                            @endif
+
+                                            </td>
+                                        <td><a class="btn btn-warning btn-sm" href="{{ route('edit_film', $film->id) }}">Modifier</a></td>
+
+
+                                        <td>
+
+
+                                                <a class="btn btn-danger btn-sm" href="{{ route($film->deleted_at? 'force_delete_film' : 'delete_film', $film->id) }}">Supprimer</a>
+
+                                        </td>
+
                                     </tr>
 
                                 @endforeach
                                 </tbody>
                             </table>
 
-                            <footer class="card-footer">
-                                {{ $films->links() }}
-                            </footer>
 
+                                <footer class="card-footer">
+                                    {{ $films->links() }}
+                                </footer>
+                            @endif
 
                     </div>
                 </div>

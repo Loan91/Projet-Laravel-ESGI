@@ -19,7 +19,9 @@ class CreateFilmsTable extends Migration
             $table->string('genre', 50);
             $table->text('description');
             $table->date('date_sortie');
+            $table->softDeletes();
             $table->timestamps(0);
+
 
         });
     }
