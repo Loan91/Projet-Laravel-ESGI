@@ -26,3 +26,18 @@ Route::get('/admin/users', 'AdminController@index')
     ->middleware('auth')
     ->middleware('can:admin_users')
     ->name('admin_users');
+
+Route::get('/admin/users/edit/{id}', 'AdminController@edit')
+    ->middleware('auth')
+    ->middleware('can:admin_users')
+    ->name('admin_users_edit');
+
+Route::post('admin/users/edit/{id}', 'AdminController@save')
+    ->middleware('auth')
+    ->middleware('can:admin_users')
+    ->name('admin_users_save');
+
+Route::get('/admin/users/delete/{id}', 'AdminController@delete')
+    ->middleware('auth')
+    ->middleware('can:admin_users')
+    ->name('admin_users_delete');

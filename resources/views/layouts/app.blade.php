@@ -38,11 +38,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        @if(Gate::allows('admin_users'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin_users') }}">Gestion utilisateurs</a>
-                        </li>
-                        @endif
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -54,6 +49,11 @@
                                 </li>
                             @endif
                         @else
+                            @if(Gate::allows('admin_users'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin_users') }}">Gestion des utilisateurs</a>
+                                </li>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
