@@ -54,10 +54,22 @@ Route::post('/films/update/{id}', 'FilmController@update')
     ->middleware('can:admin_films')
     ->name('update_film');
 
-Route::delete('/films/delete/{id}', 'FilmController@destroy')
+Route::get('/films/delete/{id}', 'FilmController@destroy')
     ->middleware('auth')
     ->middleware('can:admin_films')
     ->name('delete_film');
+
+
+Route::delete('/films/forceDelete/{id}', 'FilmController@forceDestroy')
+    ->middleware('auth')
+    ->middleware('can:admin_films')
+    ->name('force_delete_film');
+
+
+Route::get('/films/restore/{id}', 'FilmController@restore')
+    ->middleware('auth')
+    ->middleware('can:admin_films')
+    ->name('restore_film');
 
 
 

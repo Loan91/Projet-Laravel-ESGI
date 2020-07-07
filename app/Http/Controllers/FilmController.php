@@ -15,7 +15,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::paginate(5);
+        $films = Film::withTrashed()->oldest('titre')->paginate(5);
          return view('admin/film/film', ['films' => $films]);
     }
 
@@ -121,9 +121,21 @@ class FilmController extends Controller
         $film = Film::findorfail($id);
 
         $film->delete();
-        return back()->with('info', 'Le film a bien été supprimé dans la base de données.');
-
-
+        return back()->with('info', 'Le film a bien été mis dans la corbeille.');
 
     }
+
+    public function forceDestroy($id)
+    {
+        Film::withTrashed()->whereId($id)->firstOrFail()->forceDelete();
+        return back()->with('info', 'Le film a bien été supprimé définitivement dans la base de données.');
+    }
+
+
+    public function restore($id)
+    {
+        Film::withTrashed()->whereId($id)->firstOrFail()->restore();
+        return back()->with('info', 'Le film a bien été restauré.');
+    }
+
 }
