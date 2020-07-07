@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Film');
     }
+
+    public function locations()
+    {
+        return $this->hasMany('App\Location', 'emprunteur_id');
+    }
 }

@@ -73,7 +73,24 @@ Route::get('/films/restore/{id}', 'FilmController@restore')
 
 
 Route::get('/locations', 'LocationController@index')
+    ->middleware('auth')
     ->name('locations');
+
+Route::get('/locations/show/{id}', 'LocationController@show')
+    ->middleware('auth')
+    ->name('show_location');
+
+Route::get('/locations/new/{id}', 'LocationController@new')
+    ->middleware('auth')
+    ->name('new_location');
+
+Route::post('/locations/new', 'LocationController@save')
+    ->middleware('auth')
+    ->name('save_location');
+
+Route::get('/locations/select', 'LocationController@select')
+    ->middleware('auth')
+    ->name('select_location');
 
 
 

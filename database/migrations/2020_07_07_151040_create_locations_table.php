@@ -15,6 +15,10 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->integer("videotheque_id");
+            $table->integer("emprunteur_id");
+            $table->dateTime("date_debut_emprunt");
+            $table->dateTime("date_fin_emprunt");
             $table->timestamps();
         });
     }
