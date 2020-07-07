@@ -71,8 +71,6 @@ Route::get('/films/restore/{id}', 'FilmController@restore')
     ->middleware('can:admin_films')
     ->name('restore_film');
 
-Route::get('/locations', 'HomeController@index')
-    ->name('locations');
 
 
 
