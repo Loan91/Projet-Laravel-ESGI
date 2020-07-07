@@ -60,7 +60,7 @@ Route::get('/films/delete/{id}', 'FilmController@destroy')
     ->name('delete_film');
 
 
-Route::delete('/films/forceDelete/{id}', 'FilmController@forceDestroy')
+Route::get('/films/forceDelete/{id}', 'FilmController@forceDestroy')
     ->middleware('auth')
     ->middleware('can:admin_films')
     ->name('force_delete_film');
@@ -70,6 +70,10 @@ Route::get('/films/restore/{id}', 'FilmController@restore')
     ->middleware('auth')
     ->middleware('can:admin_films')
     ->name('restore_film');
+
+Route::get('/locations', 'HomeController@index')
+    ->name('locations');
+
 
 
 

@@ -84,9 +84,9 @@
                             </table>
 
 
-                            <footer class="card-footer">
-                                {{ $films->links() }}
-                            </footer>
+                                <footer class="card-footer">
+                                    {{ $films->links() }}
+                                </footer>
                             @endif
 
                     </div>
