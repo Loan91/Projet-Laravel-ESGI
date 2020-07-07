@@ -71,7 +71,7 @@ Route::get('/admin/users/edit/{id}', 'AdminController@edit')
     ->middleware('can:admin_users')
     ->name('admin_users_edit');
 
-Route::post('admin/users/edit/{id}', 'AdminController@save')
+Route::post('/admin/users/edit/{id}', 'AdminController@save')
     ->middleware('auth')
     ->middleware('can:admin_users')
     ->name('admin_users_save');
@@ -80,3 +80,21 @@ Route::get('/admin/users/delete/{id}', 'AdminController@delete')
     ->middleware('auth')
     ->middleware('can:admin_users')
     ->name('admin_users_delete');
+
+
+
+Route::get('/videotheque', 'VideothequeController@index')
+    ->middleware('auth')
+    ->name('videotheque');
+
+Route::get('/videotheque/new', 'VideothequeController@new')
+    ->middleware('auth')
+    ->name('videotheque_new');
+
+Route::post('/videotheque/new', 'VideothequeController@save')
+    ->middleware('auth')
+    ->name('videotheque_save');
+
+Route::get('/videotheque/delete/{id}', 'VideothequeController@delete')
+    ->middleware('auth')
+    ->name('videotheque_delete');
